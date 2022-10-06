@@ -1,9 +1,11 @@
 import mongoose from 'mongoose'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
-const DB_USER = 'fernanda'
-const DB_PASSWORD = 'kodemia1234'
-const DB_NAME = 'kodemia'
-const DB_HOST = 'cluster0.8tw7qqm.mongodb.net'
+// console.log(process.env)
+
+// con variables de entorno
+const  {DB_USER, DB_PASSWORD, DB_NAME, DB_HOST} = process.env
 
 
 const URL = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`
@@ -76,31 +78,31 @@ mongoose.connect(URL) // regresa una promesa
     .then(async (connection) => {
         console.log('Database connected :D')
 
-        //   Obtener a todos los koders
-          const allKoders = await Koder.find({}) // regresa una promesa
-          console.log(allKoders)
+        // //   Obtener a todos los koders
+        //   const allKoders = await Koder.find({}) // regresa una promesa
+        //   console.log(allKoders)
 
-        //   crear a un koder
-        const newKoder = {
-            name: 'Fanny',
-            lastName: "Leyva",
-            age: 19,
-            gender: 'm'
-        }
+        // //   crear a un koder
+        // const newKoder = {
+        //     name: 'Fanny',
+        //     lastName: "Leyva",
+        //     age: 19,
+        //     gender: 'm'
+        // }
 
-        const koderCreated = await Koder.create(newKoder)
-        console.log(koderCreated)
+        // const koderCreated = await Koder.create(newKoder)
+        // console.log(koderCreated)
 
-        // Actualizar a un koder
-        const newData = {
-            lastName: 'Ruiz'
-        }
-        const koderUpdated = await Koder.findByIdAndUpdate('633cee9b8d5399f634e65ed3', newData, {new: true})
-        console.log('Koder updated')
-        console.log(koderUpdated)
+        // // Actualizar a un koder
+        // const newData = {
+        //     lastName: 'Ruiz'
+        // }
+        // const koderUpdated = await Koder.findByIdAndUpdate('633cee9b8d5399f634e65ed3', newData, {new: true})
+        // console.log('Koder updated')
+        // console.log(koderUpdated)
 
-        const koderDeleted = await Koder.findByIdAndDelete('633cee9b8d5399f634e65ed3')
-        console.log(koderDeleted)
+        // const koderDeleted = await Koder.findByIdAndDelete('633cee9b8d5399f634e65ed3')
+        // console.log(koderDeleted)
     })
     .catch((error) => {
         console.error('Error: ', error)
